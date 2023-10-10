@@ -13,12 +13,48 @@
 8. Display the employee table, salary_log table.
 
 ### Program:
-### Create employee table
 
-### Create salary_log table
+```python
 
-### PLSQL Trigger code
 
+CREATE TABLE s5(
+  empid NUMBER,
+  empname VARCHAR2(10),
+  dept VARCHAR2(10),
+  salary NUMBER
+);
+
+CREATE TABLE sa_log (
+  log_id NUMBER GENERATED ALWAYS AS IDENTITY,
+  empid NUMBER,
+  empname VARCHAR2(10),
+  old_salary NUMBER,
+  new_salary NUMBER,
+  update_date DATE
+);
+-- Insert the values in the employee table
+insert into s5 values(1,'MUKESH','AIDS',1000000);
+insert into s5 values(2,'SHREE','CSE',500000);
+
+CREATE OR REPLACE TRIGGER log_sa_update
+BEFORE UPDATE ON s5
+FOR EACH ROW
+BEGIN
+  IF :OLD.salary != :NEW.salary THEN
+    INSERT INTO sa_log (empid, empname, old_salary, new_salary, update_date)
+    VALUES (:OLD.empid, :OLD.empname, :OLD.salary, :NEW.salary, SYSDATE);
+  END IF;
+END;
+/
+UPDATE s5
+SET salary = 60000
+WHERE empid = 1;
+SELECT * FROM s5;
+SELECT * FROM sa_log;
+
+
+```
 ### Output:
+![image]()
 
 ### Result:
