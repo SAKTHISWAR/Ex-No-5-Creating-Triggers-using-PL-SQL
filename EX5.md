@@ -58,3 +58,4 @@ SELECT * FROM sa_log;
 ![image](https://github.com/SAKTHISWAR/Ex-No-5-Creating-Triggers-using-PL-SQL/blob/main/1.jpeg)
 
 ### Result:
+Thus the program to create a Trigger using PL/SQL is implemented successfully.
